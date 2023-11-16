@@ -1,0 +1,40 @@
+@import url(normalice.css);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+}
+
+a, button{
+    cursor: pointer;
+}
+
+:root{
+    --fondo: #f2f2f2;
+    --blanco: #ffffff;
+    --negro: #191919;
+}
+
+input[type=text],
+input[type=date],
+input[type=time],
+input[type=email],
+input[type=password],
+input[type=phone],
+input[type=number],
+select {
+    width: 15vw;
+    padding: 0.5vw 1vw;
+    box-sizing: border-box;
+}
+
+.boton{
+    border: none;
+    width: 10vw;
+    padding: 0.5vw 1vw;
+}
