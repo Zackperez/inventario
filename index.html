@@ -31,7 +31,7 @@
                                 <p>Nombre:</p>
                             </div>
                             <div class="entrada">
-                                <input type="text" id = "nombreCampo">
+                                <input type="text" id="nombreCampo">
                             </div>
                         </div>
 
@@ -42,8 +42,8 @@
                             <div class="entrada">
                                 <select name="" id="tipoComboBoxCampo">
                                     <option value="herramientas">Herramientas</option>
-                                    <option value="varios">Varios</option>
                                     <option value="productos">Productos</option>
+                                    <option value="otros">Otros</option>
                                 </select>
                             </div>
                         </div>
@@ -53,23 +53,23 @@
                                 <p>Cantidad:</p>
                             </div>
                             <div class="entrada">
-                                <input type="number" id = "cantidadCampo" min="0">
+                                <input type="number" id="cantidadCampo" min="0">
                             </div>
                         </div>
 
-                        <div class="campo fecha">
+                        <div class="campo descripcion">
                             <div class="texto">
-                                <p>Fecha creación:</p>
+                                <p>Descripcion:</p>
                             </div>
                             <div class="entrada">
-                                <input type="date" id = "fechaCampo">
+                                <textarea id="descripcionCampo"> </textarea>
                             </div>
                         </div>
 
                     </div>
 
                     <div class="botones">
-                        <button class="boton">Agregar</button>
+                        <button id="botonAgregar" class="boton">Agregar</button>
                     </div>
 
                 </div>
@@ -80,87 +80,15 @@
                         <div class="titulo">
                             <p>Tabla de información</p>
                         </div>
-                        <div class="botones">
-                            <a><i class="fa-solid fa-trash fa-2x"></i></a>
-                            <a><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
-                        </div>
 
                     </div>
 
-                    <div class="tabla">
+                    <div class="tabla" id="tablaDatos">
                         <table>
                             <thead>
-                                <tr>
-                                    <th>Ref.</th>
-                                    <th>Nombre</th>
-                                    <th>Tipo</th>
-                                    <th>Cantidad</th>
-                                    <th>Descripción</th>
-                                    <th>Fecha creación</th>
-                                </tr>
                             </thead>
+
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Martillo</td>
-                                    <td>Herramientas</td>
-                                    <td>2</td>
-                                    <td>Martillo de clavos</td>
-                                    <td>16/11/2023</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Martillo</td>
-                                    <td>Herramientas</td>
-                                    <td>2</td>
-                                    <td>Martillo de clavos</td>
-                                    <td>16/11/2023</td>
-                                </tr>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>Martillo</td>
-                                    <td>Herramientas</td>
-                                    <td>2</td>
-                                    <td>Martillo de clavos</td>
-                                    <td>16/11/2023</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Martillo</td>
-                                    <td>Herramientas</td>
-                                    <td>2</td>
-                                    <td>Martillo de clavos</td>
-                                    <td>16/11/2023</td>
-                                </tr>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>Martillo</td>
-                                    <td>Herramientas</td>
-                                    <td>2</td>
-                                    <td>Martillo de clavos</td>
-                                    <td>16/11/2023</td>
-                                </tr>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>Martillo</td>
-                                    <td>Herramientas</td>
-                                    <td>2</td>
-                                    <td>Martillo de clavos</td>
-                                    <td>16/11/2023</td>
-                                </tr>
-
-                                <tr>
-                                    <td>1</td>
-                                    <td>Martillo</td>
-                                    <td>Herramientas</td>
-                                    <td>2</td>
-                                    <td>Martillo de clavos</td>
-                                    <td>16/11/2023</td>
-                                </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -174,9 +102,10 @@
             <h1>footer</h1>
         </footer>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://kit.fontawesome.com/1a5bcd4a97.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/index.js" type="module"></script>
 </body>
 
 </html>

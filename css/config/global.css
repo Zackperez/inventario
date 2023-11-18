@@ -14,6 +14,10 @@ a, button{
     cursor: pointer;
 }
 
+button{
+    border: none;
+}
+
 :root{
     --fondo: #f2f2f2;
     --blanco: #ffffff;
@@ -31,6 +35,13 @@ select {
     width: 15vw;
     padding: 0.5vw 1vw;
     box-sizing: border-box;
+}
+
+textarea{
+    resize: none;
+    width: 15vw;
+    height: 20vh;
+    padding: 0.5vw 0.2vw
 }
 
 .boton{

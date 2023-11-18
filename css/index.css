@@ -10,15 +10,18 @@ body{
     "menu"
     "pagina"
     "footer";
-    grid-template-rows: 15vh 100vh 20vh;
     height: 100vh;
 }
 
 .menu{
+    display: grid;
+    align-items: center;
+    height: 10vh;
     grid-area: menu;
     background-color: var(--negro);
     color: var(--blanco);
     padding: 0 2vw;
+    font-size: 0.8vw;
 }
 
 .pagina{
@@ -76,25 +79,13 @@ body{
 
 .pagina .contenedor .contenido-tabla .cabecera{
     display: grid;
-    grid-template-areas: 
-    "titulo botones";
     align-items: center;
     justify-content: space-between;
-}
-
-.pagina .contenedor .contenido-tabla .cabecera .titulo{
-    grid-area: titulo;
 }
 
 .pagina .contenedor .contenido-tabla .cabecera .titulo p{
     font-size: 2vw;
     font-weight: bold;
-}
-
-.pagina .contenedor .contenido-tabla .cabecera .botones{
-    grid-area: botones;
-    display: flex;
-    column-gap: 1.5vw;
 }
 
 .pagina .contenedor .contenido-tabla .tabla{
@@ -108,7 +99,7 @@ body{
 }
 
 .pagina .contenedor .contenido-tabla .tabla table th, td {
-    padding: 0.5vw 3vw;
+    padding: 0.5vw 2.5vw;
     border-bottom: 1px solid #ddd;
 }
 
