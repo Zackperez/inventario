@@ -49,3 +49,23 @@ textarea{
     width: 10vw;
     padding: 0.5vw 1vw;
 }
+
+.modal{
+    display: none;
+    /* POr defecto no se muestran en pantalla hasta que se abran */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-cabecera{
+    display: flex;
+    align-items: center;
+    column-gap: 0.5vw;
+    justify-content: space-between;
+    font-size: 1vw;
+}

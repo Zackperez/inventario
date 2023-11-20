@@ -1,19 +1,19 @@
 @import url(./config/global.css);
 
-body{
+body {
     background-color: var(--fondo);
 }
 
-.hero{
+.hero {
     display: grid;
-    grid-template-areas: 
-    "menu"
-    "pagina"
-    "footer";
+    grid-template-areas:
+        "menu"
+        "pagina"
+        "footer";
     height: 100vh;
 }
 
-.menu{
+.menu {
     display: grid;
     align-items: center;
     height: 10vh;
@@ -24,88 +24,50 @@ body{
     font-size: 0.8vw;
 }
 
-.pagina{
+.pagina {
     grid-area: pagina;
 }
 
-.footer{
+.footer {
     grid-area: footer;
     background-color: aqua;
 }
 
 /* PAGINA */
 
-.pagina .contenedor{
+.pagina .contenedor {
     display: grid;
-    grid-template-areas: 
-    "formulario tabla";
-    grid-template-columns: 0.3fr 1fr;
+    grid-template-areas:
+        "opciones tabla";
+    grid-template-columns: 0.2fr 1fr;
     height: 100vh;
 }
 
-.pagina .contenedor .formulario{
-    margin: 2vw;
-    padding: 0 2vw;
-    grid-area: formulario;
-    background-color: var(--blanco);
-    border-radius: 0.5vw;
+.pagina .contenedor .menu-opciones {
+    grid-area: opciones;
+    padding: 1.5vw 0;
+    background-color: white;
 }
 
-/* FORMULARIO */
-
-.pagina .contenedor .formulario{
+.pagina .contenedor .menu-opciones .opciones {
     display: flex;
     flex-direction: column;
     row-gap: 1vw;
+    /* margin: 0 0.2vw; */
 }
 
-.pagina .contenedor .formulario .titulo{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    column-gap: 0.5vw;
+.pagina .contenedor .menu-opciones .opciones a {
+    cursor: pointer;
+    padding: 0.8vw 2vw;
+    font-size: 1.1vw;
+    color: rgb(92, 91, 91);
 }
 
-/* TABLA */
-
-.pagina .contenedor .contenido-tabla{
-    grid-area: tabla;
-    display: flex;
-    flex-direction: column;
-    margin: 4vw 0;
-    padding: 0 2vw;
-    row-gap: 2vw;
+.pagina .contenedor .menu-opciones .opciones a:hover {
+    background-color: rgb(255, 244, 231);
 }
 
-.pagina .contenedor .contenido-tabla .cabecera{
-    display: grid;
-    align-items: center;
-    justify-content: space-between;
+.pagina .contenedor .menu-opciones .opciones .active {
+    border-left: 0.2vw solid rgb(236, 181, 63);
+    background-color: rgb(255, 244, 231);
 }
-
-.pagina .contenedor .contenido-tabla .cabecera .titulo p{
-    font-size: 2vw;
-    font-weight: bold;
-}
-
-.pagina .contenedor .contenido-tabla .tabla{
-    overflow: auto;
-    height: 70vh;
-}
-
-.pagina .contenedor .contenido-tabla .tabla table{
-    width: 100%;
-    text-align: center;
-}
-
-.pagina .contenedor .contenido-tabla .tabla table th, td {
-    padding: 0.5vw 2.5vw;
-    border-bottom: 1px solid #ddd;
-}
-
-.pagina .contenedor .contenido-tabla .tabla table tbody tr td{
-    width: 10%;
-}
-
-
-/* FIN TABLA */

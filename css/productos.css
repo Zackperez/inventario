@@ -1,0 +1,181 @@
+@import url(./config/global.css);
+
+body {
+    background-color: var(--fondo);
+}
+
+.hero {
+    display: grid;
+    grid-template-areas:
+        "menu"
+        "pagina"
+        "footer";
+    height: 100vh;
+}
+
+.menu {
+    display: grid;
+    align-items: center;
+    height: 10vh;
+    grid-area: menu;
+    background-color: var(--negro);
+    color: var(--blanco);
+    padding: 0 2vw;
+    font-size: 0.8vw;
+}
+
+.pagina {
+    grid-area: pagina;
+}
+
+.footer {
+    grid-area: footer;
+    background-color: aqua;
+}
+
+/* PAGINA */
+
+.pagina .contenedor {
+    display: grid;
+    grid-template-areas:
+        "opciones tabla";
+    grid-template-columns: 0.2fr 1fr;
+    height: 100vh;
+}
+
+.pagina .contenedor .menu-opciones {
+    grid-area: opciones;
+    padding: 1.5vw 0;
+    background-color: white;
+}
+
+.pagina .contenedor .menu-opciones .opciones {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+    /* margin: 0 0.2vw; */
+}
+
+.pagina .contenedor .menu-opciones .opciones a {
+    cursor: pointer;
+    padding: 0.8vw 2vw;
+    font-size: 1.1vw;
+    color: rgb(92, 91, 91);
+}
+
+.pagina .contenedor .menu-opciones .opciones a:hover {
+    background-color: rgb(255, 244, 231);
+}
+
+.pagina .contenedor .menu-opciones .opciones .active {
+    border-left: 0.2vw solid rgb(236, 181, 63);
+    background-color: rgb(255, 244, 231);
+}
+
+/* FORMULARIO (MODAL)*/
+
+.pagina .contenedor .formulario .contenido {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+    margin: 2vw 79.5vw;
+    padding: 0 2vw;
+    background-color: var(--blanco);
+    border-radius: 0.5vw;
+    width: 15vw;
+    height: 90vh;
+}
+
+/* INFORMACION DATOS (MODAL)*/
+
+.pagina .contenedor .informacion-fila .contenido {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+    margin: 5% 25%;
+    padding: 0 2vw;
+    background-color: var(--blanco);
+    border-radius: 0.5vw;
+    width: 50vw;
+    height: 80vh;
+}
+
+/* TABLA */
+
+.pagina .contenedor .contenido-tabla {
+    grid-area: tabla;
+    display: flex;
+    flex-direction: column;
+    margin: 1vw;
+    padding: 0 2vw;
+    row-gap: 1.5vw;
+}
+
+.pagina .contenedor .contenido-tabla .cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pagina .contenedor .contenido-tabla .cabecera .botones {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 1vw;
+}
+
+.pagina .contenedor .contenido-tabla .cabecera .botones button {
+    background-color: bisque;
+    padding: 0.5vw;
+    border-radius: 0.5vw;
+    font-size: 1.1vw;
+}
+
+.pagina .contenedor .contenido-tabla .cabecera .botones button:hover {
+    background-color: rgb(255, 223, 183);
+}
+
+.pagina .contenedor .contenido-tabla .cabecera .titulo p {
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.no-padding {
+    padding: 1vw;
+    border: none;
+}
+
+.pagina .contenedor .contenido-tabla .tabla {
+    overflow: auto;
+    height: 70vh;
+}
+
+.pagina .contenedor .contenido-tabla .tabla {
+    width: 100%;
+    text-align: center;
+    border-radius: 0.5vw;
+    background-color: #ffff;
+    font-size: 1vw;
+    padding: 0.2vw;
+}
+
+.pagina .contenedor .contenido-tabla .tabla th,
+td {
+    padding: 0.7vw 4vw;
+}
+
+
+.pagina .contenedor .contenido-tabla .tabla td {
+    overflow: hidden;
+    /* Otra opción es ocultar el contenido que excede el ancho máximo */
+    text-overflow: ellipsis;
+    /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
+    white-space: nowrap;
+    max-width: 8vw;
+}
+
+.pagina .contenedor .contenido-tabla .tabla table tbody tr td {
+    width: 10%;
+}
+
+
+/* FIN TABLA */

@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/index.css">
-    <title>Inventario</title>
+    <title>INICIO</title>
 </head>
 
 <body>
-
     <div class="hero">
         <nav class="menu">
             <h1>Transporte</h1>
@@ -17,95 +16,23 @@
 
         <div class="pagina">
             <section class="contenedor">
-
-                <div class="formulario">
-                    <div class="titulo">
-                        <h1>Formulario</h1>
-                        <a><i class="fa-solid fa-circle-info"></i></a>
-                    </div>
-
-                    <div class="campos">
-
-                        <div class="campo nombre">
-                            <div class="texto">
-                                <p>Nombre:</p>
-                            </div>
-                            <div class="entrada">
-                                <input type="text" id="nombreCampo">
-                            </div>
-                        </div>
-
-                        <div class="campo tipo">
-                            <div class="texto">
-                                <p>Tipo:</p>
-                            </div>
-                            <div class="entrada">
-                                <select name="" id="tipoComboBoxCampo">
-                                    <option value="herramientas">Herramientas</option>
-                                    <option value="productos">Productos</option>
-                                    <option value="otros">Otros</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="campo cantidad">
-                            <div class="texto">
-                                <p>Cantidad:</p>
-                            </div>
-                            <div class="entrada">
-                                <input type="number" id="cantidadCampo" min="0">
-                            </div>
-                        </div>
-
-                        <div class="campo descripcion">
-                            <div class="texto">
-                                <p>Descripcion:</p>
-                            </div>
-                            <div class="entrada">
-                                <textarea id="descripcionCampo"> </textarea>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="botones">
-                        <button id="botonAgregar" class="boton">Agregar</button>
-                    </div>
-
+                <div class="menu-opciones">
+                    <ul class="opciones">
+                        <a class="active" href="../index.html"><i class="fa-brands fa-dropbox"></i>Inicio</a>
+                        <a href="./pages/productos.html"><i class="fa-brands fa-dropbox"></i>Productos</a>
+                        <a href="./pages/aceites.html"><i class="fa-solid fa-oil-can"></i>Aceites</a>
+                        <a href="./pages/personal.html"><i class="fa-solid fa-user"></i>Personal</a>
+                    </ul>
                 </div>
-
-                <div class="contenido-tabla">
-
-                    <div class="cabecera">
-                        <div class="titulo">
-                            <p>Tabla de información</p>
-                        </div>
-
-                    </div>
-
-                    <div class="tabla" id="tablaDatos">
-                        <table>
-                            <thead>
-                            </thead>
-
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
             </section>
         </div>
-
-        <footer class="footer">
-            <h1>footer</h1>
-        </footer>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://kit.fontawesome.com/1a5bcd4a97.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./js/index.js" type="module"></script>
+    <script src="../js/productos/productos.js" type="module"></script>
+
 </body>
 
 </html>
