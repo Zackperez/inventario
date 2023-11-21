@@ -2,22 +2,25 @@ import config from '../config/supabase.js';
 
 const Modelo = {
 
-    async insertarDatosTabla(marca, tipo, cantidad, litros, descripcion) {
+    async insertarAceite(nombre, marca, tipo, cantidad, litros, descripcion) {
         const datos_insertar = {
+            nombre: nombre,
             marca: marca,
             tipo: tipo,
-            cantidad: cantidad,
+            cantidad: 0,
             litros: litros,
             descripcion: descripcion
         }
 
-        const res = await axios({
-            method: "POST",
-            url: 'https://iowtrgutpgdhouzxnvna.supabase.co/rest/v1/aceites',
-            headers: config.headers,
-            data: datos_insertar
-        });
-        return res;
+        console.log(datos_insertar)
+
+        // const res = await axios({
+        //     method: "POST",
+        //     url: 'https://iowtrgutpgdhouzxnvna.supabase.co/rest/v1/aceites',
+        //     headers: config.headers,
+        //     data: datos_insertar
+        // });
+        //return res;
     },
 
     async traerTodosDatos() {
@@ -30,7 +33,7 @@ const Modelo = {
         return res;
     },
 
-    async eliminarDatosTabla(ref) {
+    async eliminarAceite(ref) {
 
         const res = await axios({
             method: "DELETE",
@@ -144,31 +147,26 @@ const Vista = {
         return { nombre, tipo, cantidad, descripcion }
     },
 
-    carroOCamion(tipo){
-        if(tipo == "camion"){
+    carroOCamion(tipo) {
+        if (tipo == "camion") {
             return `<p class="camion">camion</p>`
         }
-        if(tipo == "carro"){
+        if (tipo == "carro") {
             return `<p class="carro">carro</p>`
         }
-    },
-
-    eliminarAceite(){
-
     },
 
     mostrarTablaDatos: function () {
         axios.get('https://iowtrgutpgdhouzxnvna.supabase.co/rest/v1/aceites?select=*', config)
             .then(function (response) {
                 const datos = response.data;
-
                 datos.forEach(element => {
                     const aceites = document.getElementById('contenidoAceites')
                     const div = document.createElement('div');
                     div.classList.add('aceite')
                     const tipo_elegido = Vista.carroOCamion(element.tipo)
-                    div.innerHTML = 
-                    `
+                    div.innerHTML =
+                        `
                     <div class="cabecera">
                         <div class="texto">
                             <div class="principal">
@@ -181,9 +179,9 @@ const Vista = {
                         </div>
 
                         <div class="botones-accion">
-                            <button id = "eliminarAceite"><i class="fa-solid fa-trash"></i></button>
-                            <button id = "historialAceite"><i class="fa-regular fa-clipboard"></i></button>
-                            <button id = "editarAceite"><i class="fa-regular fa-pen-to-square"></i></button>
+                            <button class = "eliminarAceite"><i class="fa-solid fa-trash"></i></button>
+                            <button class = "historialAceite"><i class="fa-regular fa-clipboard"></i></button>
+                            <button class = "editarAceite"><i class="fa-regular fa-pen-to-square"></i></button>
                         </div>
 
                     </div>
@@ -206,50 +204,53 @@ const Vista = {
                     `
                     aceites.append(div)
 
-                    aceites.addEventListener('click', function(event) {
-                        if (event.target.tagName === 'BUTTON') {
-                            const buttonId = event.target.id;
-                    
-                            // Obtén el div padre del botón clicado (el contenedor del aceite)
-                            const contenedorAceite = event.target.closest('.aceite');
-                    
-                            // Verifica si se encontró el contenedor del aceite
-                            if (contenedorAceite) {
-                                // Obtén la información específica del aceite
-                                const nombreAceite = contenedorAceite.querySelector('.principal p').innerText;
-                                const tipoAceite = contenedorAceite.querySelector('.secundario').innerText;
-                                const litrosAceite = contenedorAceite.querySelector('.cantidad p').innerText;
-                    
-                                // Realiza acciones según el botón clicado y la información del aceite
-                                switch (buttonId) {
-                                    case 'eliminarAceite':
-                                        // Lógica para eliminar aceite
-                                        console.log('Eliminar aceite:', nombreAceite);
-                                        break;
-                                    case 'historialAceite':
-                                        // Lógica para historial de aceite
-                                        console.log('Historial aceite:', nombreAceite);
-                                        break;
-                                    case 'editarAceite':
-                                        // Lógica para editar aceite
-                                        console.log('Editar aceite:', nombreAceite);
-                                        break;
-                                    // Agrega más casos según sea necesario
-                                }
+                    // Agregar eventos a los botones creados dinámicamente
+                    div.querySelector('.eliminarAceite').addEventListener('click', function () {
+                        Swal.fire({
+                            title: ` Vas a eliminar los siguientes datos: `,
+                            html: `
+                                <div style="text-align: left;">
+                                    <b>Nombre:</b> ${element.nombre}<br>
+                                    <b>Tipo:</b> ${element.tipo}<br>
+                                    <b>Litros:</b> ${element.litros}<br>
+                                    <b>Marca:</b> ${element.marca}<br>
+                                    <b>Descripción:</b> ${element.descripcion}<br>
+                                </div>
+                                `,
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#3085d6",
+                            cancelButtonColor: "#d33",
+                            confirmButtonText: "Eliminar"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Controlador.eliminarAceite(element.ref)
                             }
-                        }
+                        });
+
+                    });
+
+                    div.querySelector('.historialAceite').addEventListener('click', function () {
+                        // Lógica para el botón historialAceite
+                        alert('Historial aceite: ' + element.nombre);
+                    });
+
+                    div.querySelector('.editarAceite').addEventListener('click', function () {
+                        // Lógica para el botón editarAceite
+                        alert('Editar aceite: ' + element.nombre);
                     });
                 });
+
             });
     },
 
-    traerDatosEditarFormulario() {
-        const nombreCampo = document.getElementById('nombreCampoEditar');
-        const tipoCampo = document.getElementById('tipoCampoEditar');
-        const cantidadCampo = document.getElementById('cantidadCampoEditar');
-        const descripcionCampo = document.getElementById('descripcionCampoEditar');
+    traerDatosAceiteAgregar() {
+        const nombreAceiteAgregar = document.getElementById('nombreAceiteAgregar').value;
+        const tipoComboBoxAceiteAgregar = document.getElementById('tipoComboBoxAceiteAgregar').value;
+        const cantidadCampoAceiteAgregar = document.getElementById('cantidadCampoAceiteAgregar').value;
+        const descripcionAceiteAgregar = document.getElementById('descripcionAceiteAgregar').value;
 
-        return { nombreCampo, tipoCampo, cantidadCampo, descripcionCampo }
+        return { nombreAceiteAgregar, tipoComboBoxAceiteAgregar, cantidadCampoAceiteAgregar, descripcionAceiteAgregar }
     },
 
     mostrarMensajeExitoso(mensaje) {
@@ -271,6 +272,17 @@ const Vista = {
 
 const Controlador = {
 
+    async insertarAceite() {
+
+        const { nombreAceiteAgregar, tipoComboBoxAceiteAgregar, cantidadCampoAceiteAgregar, descripcionAceiteAgregar } = Vista.traerDatosAceiteAgregar();
+
+        try {
+            const res = await Modelo.insertarAceite(nombreAceiteAgregar, tipoComboBoxAceiteAgregar, cantidadCampoAceiteAgregar, descripcionAceiteAgregar)
+        } catch (error) {
+
+        }
+    },
+
     async mostrarTodosDatos() {
 
         try {
@@ -278,6 +290,15 @@ const Controlador = {
 
         } catch (error) {
             console.log(error)
+        }
+    },
+
+    async eliminarAceite(ref) {
+        try {
+            const res = await Modelo.eliminarAceite(ref);
+            location.reload();
+        } catch (error) {
+
         }
     },
 
@@ -290,3 +311,27 @@ const Controlador = {
 document.addEventListener('DOMContentLoaded', function () {
     Controlador.iniciar()
 })
+
+/* MODAL Notificaciones */
+var modalAgregarAceite = document.getElementById("targetModalAgregarAceite");
+var abrirModalAgregarAceite = document.getElementById("abrirModalAgregarAceite");
+var btnCerrarModalAceite = document.getElementsByClassName("cerrar-modal-agregar-aceite")[0];
+
+abrirModalAgregarAceite.onclick = function () {
+    modalAgregarAceite.style.display = "block";
+}
+
+btnCerrarModalAceite.onclick = function () {
+    modalAgregarAceite.style.display = "none";
+}
+
+window.onclick = function (event) {
+    if (event.target == modalAgregarAceite) {
+        modalAgregarAceite.style.display = "none";
+    }
+}
+
+const editarAceite = document.getElementById('editarAceite')
+editarAceite.onclick = function () {
+    Controlador.insertarAceite()
+}

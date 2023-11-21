@@ -178,7 +178,6 @@ td {
     justify-content: space-around;
     flex-wrap: wrap;
     row-gap: 5vh;
-
 }
 
 .contenedor-aceites .contenido .aceite{
@@ -195,11 +194,9 @@ td {
     justify-content: space-between;
 }
 
-
 .contenedor-aceites .contenido .aceite .cabecera .texto .principal p{
     font-size: 1.3vw;
 }
-
 
 .contenedor-aceites .contenido .aceite .cabecera .texto .secundario .carro{
     text-align: center;
@@ -238,3 +235,60 @@ td {
 }
 
 /* FIN ACEITES */
+
+
+/* INFORMACION DATOS (MODAL)*/
+
+.pagina .contenedor-aceites .agregar-formulario .contenido {
+    row-gap: 2vw;
+    margin: 2% 25%;
+    padding: 2vw;
+    background-color: var(--blanco);
+    border-radius: 0.5vw;
+    width: 50vw;
+    height: 80vh;
+}
+
+.pagina .contenedor-aceites .modal .modal-cabecera{
+    display: flex;
+    border-bottom: 1px solid var(--fondo);
+}
+
+.pagina .contenedor-aceites .modal .modal-cuerpo{
+    display: grid;
+    grid-template-areas:
+        "nombre tipo"
+        "litros marca"
+        "descripcion descripcion";
+    row-gap: 3vh;
+    justify-items: center;
+}
+
+.pagina .contenedor-aceites .modal .modal-cuerpo .nombre{
+    grid-area: nombre;
+}
+
+.pagina .contenedor-aceites .modal .modal-cuerpo .tipo{
+    grid-area: tipo;
+}
+
+.pagina .contenedor-aceites .modal .modal-cuerpo .marca{
+    grid-area: marca;
+}
+
+.pagina .contenedor-aceites .modal .modal-cuerpo .litros{
+    grid-area: litros;
+}
+
+.pagina .contenedor-aceites .modal .modal-cuerpo .descripcion{
+    grid-area: descripcion;
+}
+
+.pagina .contenedor-aceites .modal .modal-cuerpo .descripcion .entrada textarea{
+    width: 48vw;
+    height: 30vh;
+}
+
+.pagina .contenedor-aceites .modal .modal-footer{
+    text-align: end;
+}
