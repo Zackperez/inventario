@@ -16,6 +16,7 @@ a, button{
 
 button{
     border: none;
+    background-color: transparent;
 }
 
 :root{
@@ -39,8 +40,6 @@ select {
 
 textarea{
     resize: none;
-    width: 15vw;
-    height: 20vh;
     padding: 0.5vw 0.2vw
 }
 

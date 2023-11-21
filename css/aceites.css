@@ -72,73 +72,6 @@ body {
     background-color: rgb(255, 244, 231);
 }
 
-/* FORMULARIO (MODAL)*/
-
-.pagina .contenedor .formulario .contenido {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1vw;
-    margin: 2vw 79.5vw;
-    padding: 0 2vw;
-    background-color: var(--blanco);
-    border-radius: 0.5vw;
-    width: 15vw;
-    height: 90vh;
-}
-
-/* INFORMACION DATOS (MODAL)*/
-
-.pagina .contenedor .editar-formulario .contenido {
-    display: flex;
-    flex-direction: column;
-    row-gap: 2vw;
-    margin: 5% 25%;
-    padding: 0 2vw;
-    background-color: var(--blanco);
-    border-radius: 0.5vw;
-    width: 50vw;
-    height: 80vh;
-}
-
-.pagina .contenedor .modal .modal-cabecera{
-    display: flex;
-    border-bottom: 1px solid var(--fondo);
-}
-
-.pagina .contenedor .modal .modal-cuerpo{
-    display: grid;
-    grid-template-areas: 
-    "nombre tipo cantidad"
-    "descripcion descripcion descripcion";
-    row-gap: 3vh;
-}
-
-.pagina .contenedor .modal .modal-cuerpo .nombre{
-    grid-area: nombre;
-}
-
-.pagina .contenedor .modal .modal-cuerpo .tipo{
-    grid-area: tipo;
-}
-
-.pagina .contenedor .modal .modal-cuerpo .cantidad{
-    grid-area: cantidad;
-}
-
-.pagina .contenedor .modal .modal-cuerpo .descripcion{
-    grid-area: descripcion;
-}
-
-.pagina .contenedor .modal .modal-cuerpo .descripcion .entrada textarea{
-    width: 48vw;
-    height: 30vh;
-}
-
-.pagina .contenedor .modal .modal-footer{
-    text-align: end;
-}
-
-
 /* TABLA */
 
 .pagina .contenedor .contenido-tabla {
@@ -204,11 +137,9 @@ td {
 
 .pagina .contenedor .contenido-tabla .tabla td {
     overflow: hidden;
-    /* Otra opción es ocultar el contenido que excede el ancho máximo */
     text-overflow: ellipsis;
-    /* Agrega puntos suspensivos (...) para indicar que hay más contenido oculto */
     white-space: nowrap;
-    max-width: 6.5vw;
+    max-width: 8vw;
 }
 
 .pagina .contenedor .contenido-tabla .tabla table tbody tr td {
@@ -217,3 +148,93 @@ td {
 
 
 /* FIN TABLA */
+
+/* ACEITES */
+
+.contenedor-aceites {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5vh;
+    padding: 2vw;
+}
+
+.contenedor-aceites .botones{
+    text-align: end;
+}
+
+.contenedor-aceites .botones button {
+    background-color: bisque;
+    padding: 0.5vw;
+    border-radius: 0.5vw;
+    font-size: 1.1vw;
+}
+
+.contenedor-aceites .botones button:hover {
+    background-color: rgb(255, 223, 183);
+}
+
+.contenedor-aceites .contenido{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    row-gap: 5vh;
+
+}
+
+.contenedor-aceites .contenido .aceite{
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    padding: 1vw;
+    box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+    background-color: var(--blanco);
+}
+
+.contenedor-aceites .contenido .aceite .cabecera{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.contenedor-aceites .contenido .aceite .cabecera .texto .principal p{
+    font-size: 1.3vw;
+}
+
+
+.contenedor-aceites .contenido .aceite .cabecera .texto .secundario .carro{
+    text-align: center;
+    padding: 0.1vw;
+    border-radius: 0.5vw;
+    background-color: aqua;
+}
+
+.contenedor-aceites .contenido .aceite .cabecera .texto .secundario .camion{
+    text-align: center;
+    padding: 0.1vw;
+    border-radius: 0.5vw;
+    background-color: violet;
+}
+
+.contenedor-aceites .contenido .aceite .cabecera .botones-accion{
+    display: flex;
+    column-gap: 1vw;
+}
+
+.contenedor-aceites .contenido .aceite .cuerpo{
+    display: flex;
+    flex-direction: column;
+    height: 40vh;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.contenedor-aceites .contenido .aceite .cuerpo .cantidad p{
+    font-size: 2vw;
+}
+
+.contenedor-aceites .contenido .aceite .cuerpo .botones-interaccion{
+    display: flex;
+    column-gap: 2vw;
+}
+
+/* FIN ACEITES */

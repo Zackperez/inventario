@@ -196,13 +196,12 @@ const Vista = {
                             icono.setAttribute('id', 'abrirModalInformacionDatos');
                             boton.addEventListener('click', () => {
                                 Vista.modalCero("targetModalInformacionDatos", "cerrar-modal-informacion-datos")
-                                let modalCuerpo = document.getElementById('modalCuerpo');
+                                const modalCuerpo = document.getElementById('modalCuerpo');
                                 const nombreCampo = dato['nombre'];
                                 const tipoCampo = dato['tipo']
                                 const cantidadCampo = dato['cantidad']
                                 const descripcionCampo = dato['descripcion']
-                                modalContenido = Vista.modalContenido(modalCuerpo, nombreCampo, tipoCampo, cantidadCampo, descripcionCampo)
-                                modalCuerpo.appendChild(modalContenido)
+                                Vista.modalContenido(modalCuerpo, nombreCampo, tipoCampo, cantidadCampo, descripcionCampo)
                             });
                         } else if (i === 1) {
                             // Configuración para el botón de eliminar
@@ -399,6 +398,4 @@ const Controlador = {
 
 document.addEventListener('DOMContentLoaded', function () {
     Controlador.iniciar()
-
-
 })

@@ -1,0 +1,73 @@
+@import url(./config/global.css);
+
+body {
+    background-color: var(--fondo);
+}
+
+.hero {
+    display: grid;
+    grid-template-areas:
+        "menu"
+        "pagina"
+        "footer";
+    height: 100vh;
+}
+
+.menu {
+    display: grid;
+    align-items: center;
+    height: 10vh;
+    grid-area: menu;
+    background-color: var(--negro);
+    color: var(--blanco);
+    padding: 0 2vw;
+    font-size: 0.8vw;
+}
+
+.pagina {
+    grid-area: pagina;
+}
+
+.footer {
+    grid-area: footer;
+    background-color: aqua;
+}
+
+/* PAGINA */
+
+.pagina .contenedor {
+    display: grid;
+    grid-template-areas:
+        "opciones tabla";
+    grid-template-columns: 0.2fr 1fr;
+    height: 100vh;
+}
+
+.pagina .contenedor .menu-opciones {
+    grid-area: opciones;
+    padding: 1.5vw 0;
+    background-color: white;
+}
+
+.pagina .contenedor .menu-opciones .opciones {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+    /* margin: 0 0.2vw; */
+}
+
+.pagina .contenedor .menu-opciones .opciones a {
+    cursor: pointer;
+    padding: 0.8vw 2vw;
+    font-size: 1.1vw;
+    color: rgb(92, 91, 91);
+}
+
+.pagina .contenedor .menu-opciones .opciones a:hover {
+    background-color: rgb(255, 244, 231);
+}
+
+.pagina .contenedor .menu-opciones .opciones .active {
+    border-left: 0.2vw solid rgb(236, 181, 63);
+    background-color: rgb(255, 244, 231);
+}
