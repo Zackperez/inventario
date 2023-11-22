@@ -207,7 +207,7 @@ td {
 
 .contenedor-aceites .contenido .aceite .cabecera .texto .secundario .camion{
     text-align: center;
-    padding: 0.1vw;
+    padding: 0vw 1.5vw;
     border-radius: 0.5vw;
     background-color: violet;
 }

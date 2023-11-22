@@ -2,25 +2,22 @@ import config from '../config/supabase.js';
 
 const Modelo = {
 
-    async insertarAceite(nombre, marca, tipo, cantidad, litros, descripcion) {
+    async insertarAceite(nombre, marca, tipo, litros, descripcion) {
         const datos_insertar = {
             nombre: nombre,
             marca: marca,
             tipo: tipo,
-            cantidad: 0,
-            litros: litros,
+            litros: parseFloat(litros),
             descripcion: descripcion
         }
 
-        console.log(datos_insertar)
-
-        // const res = await axios({
-        //     method: "POST",
-        //     url: 'https://iowtrgutpgdhouzxnvna.supabase.co/rest/v1/aceites',
-        //     headers: config.headers,
-        //     data: datos_insertar
-        // });
-        //return res;
+        const res = await axios({
+            method: "POST",
+            url: 'https://iowtrgutpgdhouzxnvna.supabase.co/rest/v1/aceites',
+            headers: config.headers,
+            data: datos_insertar
+        });
+        return res;
     },
 
     async traerTodosDatos() {
@@ -42,6 +39,28 @@ const Modelo = {
         });
         return res;
     },
+
+    async agregarHistorial(tabla, modificado, usuario, fechaActual, descripcion) {
+        const asd = JSON.stringify(descripcion)
+
+        const datos_insertar = {
+            tabla: tabla,
+            modificado: modificado,
+            usuario: usuario,
+            fecha: fechaActual,
+            descripcion: asd
+        }
+
+        console.log(datos_insertar)
+
+        const res = await axios({
+            method: "POST",
+            url: 'https://iowtrgutpgdhouzxnvna.supabase.co/rest/v1/historial',
+            headers: config.headers,
+            data: datos_insertar
+        });
+        return res;
+    }
 
 }
 
@@ -245,12 +264,13 @@ const Vista = {
     },
 
     traerDatosAceiteAgregar() {
-        const nombreAceiteAgregar = document.getElementById('nombreAceiteAgregar').value;
-        const tipoComboBoxAceiteAgregar = document.getElementById('tipoComboBoxAceiteAgregar').value;
-        const cantidadCampoAceiteAgregar = document.getElementById('cantidadCampoAceiteAgregar').value;
-        const descripcionAceiteAgregar = document.getElementById('descripcionAceiteAgregar').value;
+        const nombreAceiteAgregar = document.getElementById('nombreAceiteAgregar');
+        const tipoComboBoxAceiteAgregar = document.getElementById('tipoComboBoxAceiteAgregar');
+        const litrosCampoAceiteAgregar = document.getElementById('litrosCampoAceiteAgregar');
+        const descripcionAceiteAgregar = document.getElementById('descripcionAceiteAgregar');
+        const marcaAceiteAgregar = document.getElementById('marcaAceiteAgregar');
 
-        return { nombreAceiteAgregar, tipoComboBoxAceiteAgregar, cantidadCampoAceiteAgregar, descripcionAceiteAgregar }
+        return { nombreAceiteAgregar, marcaAceiteAgregar, tipoComboBoxAceiteAgregar, litrosCampoAceiteAgregar, descripcionAceiteAgregar }
     },
 
     mostrarMensajeExitoso(mensaje) {
@@ -268,16 +288,93 @@ const Vista = {
             text: mensaje,
         });
     },
+
+    vaciarCampos() {
+        const nombre = document.getElementById('nombreAceiteAgregar');
+        const tipo = document.getElementById('tipoComboBoxAceiteAgregar');
+        const litros = document.getElementById('litrosCampoAceiteAgregar');
+        const descripcion = document.getElementById('descripcionAceiteAgregar');
+        const marca = document.getElementById('marcaAceiteAgregar');
+
+        nombre.value = ""
+        marca.value = ""
+        tipo.value = ""
+        litros.value = ""
+        descripcion.value = ""
+
+    },
+
+    fechaHoraActual() {
+        // Crear un nuevo objeto Date, que contendrá la fecha y hora actuales
+        var fechaActual = new Date();
+
+        // Obtener los componentes de la fecha y hora
+        var año = fechaActual.getFullYear();
+        var mes = fechaActual.getMonth() + 1; // Se le agrega +1 ya que sino, iniciaria el mes desde 0 (ej. Enero = 0, Febrero = 1)
+        var dia = fechaActual.getDate();
+        var horas = fechaActual.getHours();
+        var minutos = fechaActual.getMinutes();
+        var segundos = fechaActual.getSeconds();
+
+        // Formatear la salida para asegurarse de que los valores tengan dos dígitos
+        if (mes < 10) {
+            mes = '0' + mes;
+        }
+
+        if (dia < 10) {
+            dia = '0' + dia;
+        }
+
+        if (horas < 10) {
+            horas = '0' + horas;
+        }
+
+        if (minutos < 10) {
+            minutos = '0' + minutos;
+        }
+
+        if (segundos < 10) {
+            segundos = '0' + segundos;
+        }
+
+        // Crear una cadena con la fecha y hora formateada
+        var fechaHoraActual = año + '-' + mes + '-' + dia + ' ' + horas + ':' + minutos + ':' + segundos;
+
+        // Imprimir la cadena
+        return fechaHoraActual
+    }
 }
 
 const Controlador = {
 
     async insertarAceite() {
 
-        const { nombreAceiteAgregar, tipoComboBoxAceiteAgregar, cantidadCampoAceiteAgregar, descripcionAceiteAgregar } = Vista.traerDatosAceiteAgregar();
+        const { nombreAceiteAgregar, marcaAceiteAgregar, tipoComboBoxAceiteAgregar, litrosCampoAceiteAgregar, descripcionAceiteAgregar } = Vista.traerDatosAceiteAgregar();
+        const nombreAceite = nombreAceiteAgregar.value;
+        const marcaAceite = marcaAceiteAgregar.value;
+        const tipoAceite = tipoComboBoxAceiteAgregar.value;
+        const litrosAceite = litrosCampoAceiteAgregar.value;
+        const descripcionAceite = descripcionAceiteAgregar.value;
 
         try {
-            const res = await Modelo.insertarAceite(nombreAceiteAgregar, tipoComboBoxAceiteAgregar, cantidadCampoAceiteAgregar, descripcionAceiteAgregar)
+            const res = await Modelo.insertarAceite(nombreAceite, marcaAceite, tipoAceite, litrosAceite, descripcionAceite);
+            console.log(res)
+            if (res.status == 201) {
+                const datos_insertados = {
+                    nombre: nombreAceite,
+                    marca: marcaAceite,
+                    tipo: tipoAceite,
+                    litros: parseFloat(litrosAceite),
+                    descripcion: descripcionAceite
+                }
+
+                console.log(datos_insertados)
+
+                this.agregarHistorial(res.status, "aceites", "añadido de aceite", "admin", datos_insertados)
+                Vista.mostrarMensajeExitoso("¡Aceite agregado!")
+                Vista.vaciarCampos()
+            }
+
         } catch (error) {
 
         }
@@ -293,10 +390,25 @@ const Controlador = {
         }
     },
 
+    async agregarHistorial(status, tabla, modificado, usuario) {
+        const fechaActual = Vista.fechaHoraActual()
+
+        if (status == 204) {
+            const res = await Modelo.agregarHistorial(tabla, modificado, usuario, fechaActual)
+            console.log(res)
+        }
+
+        if (status == 201) {
+            const res = await Modelo.agregarHistorial(tabla, modificado, usuario, fechaActual)
+            console.log(res)
+        }
+    },
+
     async eliminarAceite(ref) {
         try {
             const res = await Modelo.eliminarAceite(ref);
-            location.reload();
+            this.agregarHistorial(res.status, "aceites", "eliminacion de aceite", "admin")
+            //location.reload();
         } catch (error) {
 
         }
@@ -327,11 +439,50 @@ btnCerrarModalAceite.onclick = function () {
 
 window.onclick = function (event) {
     if (event.target == modalAgregarAceite) {
-        modalAgregarAceite.style.display = "none";
+        modalAgregarAceite.style.display = "block";
     }
 }
 
 const editarAceite = document.getElementById('editarAceite')
 editarAceite.onclick = function () {
-    Controlador.insertarAceite()
+
+    const nombre = document.getElementById('nombreAceiteAgregar');
+    const tipo = document.getElementById('tipoComboBoxAceiteAgregar');
+    const marca = document.getElementById('marcaAceiteAgregar');
+    const litros = document.getElementById('litrosCampoAceiteAgregar');
+    const descripcion = document.getElementById('descripcionAceiteAgregar');
+
+    if (nombre.value.length == 0 || tipo.value.length == 0 || marca.value.length == 0 || litros.value.length == 0 || descripcion.value.length == 0) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "Tienes que llenar todos los campos"
+        });
+    } else {
+        Swal.fire({
+            title: ` Vas a ingresar los siguientes datos: `,
+            html: `
+            <div style="text-align: left;">
+                <b>Nombre:</b> ${nombre.value}<br>
+                <b>Marca:</b> ${marca.value}<br>
+                <b>Tipo:</b> ${tipo.value}<br>
+                <b>Litros:</b> ${litros.value}<br>
+                <b>Descripción:</b> ${descripcion.value}<br>
+            </div>
+            `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Agregar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Controlador.insertarAceite();
+            } else {
+                Vista.vaciarCampos()
+            }
+        });
+    }
+
+
 }
