@@ -2,11 +2,34 @@ import config from '../config/supabase.js';
 
 const Modelo = {
 
-    async insertarDatosTabla(nombre, tipo, cantidad, descripcion) {
+    async agregarHistorial(tabla, modificado, usuario, fechaActual, descripcion) {
+        const asd = JSON.stringify(descripcion)
+
+        const datos_insertar = {
+            tabla: tabla,
+            modificado: modificado,
+            usuario: usuario,
+            fecha: fechaActual,
+            descripcion: asd
+        }
+
+        console.log(datos_insertar)
+
+        const res = await axios({
+            method: "POST",
+            url: 'https://iowtrgutpgdhouzxnvna.supabase.co/rest/v1/historial',
+            headers: config.headers,
+            data: datos_insertar
+        });
+        return res;
+    },
+
+    async insertarDatosTabla(nombre, tipo, cantidad, ubicacion, descripcion) {
         const datos_insertar = {
             nombre: nombre,
             tipo: tipo,
             cantidad: cantidad,
+            ubicacion: ubicacion,
             descripcion: descripcion
         }
 
@@ -86,7 +109,7 @@ const Vista = {
         }
     },
 
-    modalContenido(modalCuerpo, nombreCampo, tipoCampo, cantidadCampo, descripcionCampo) {
+    modalContenido(modalCuerpo, nombreCampo, tipoCampo, cantidadCampo, ubicacionCampo, descripcionCampo) {
         modalCuerpo.innerHTML =
             `
             <div class="campo nombre">
@@ -121,6 +144,15 @@ const Vista = {
                 </div>
             </div>
 
+            <div class="campo ubicacion">
+                <div class="texto">
+                    <p>Ubicacion:</p>
+                </div>
+                <div class="entrada">
+                    <input type="text" id="ubicacionCampoEditar" min="0" value = "${ubicacionCampo}">
+                </div>
+            </div>
+
             <div class="campo descripcion">
                 <div class="texto">
                     <p>Descripcion:</p>
@@ -138,8 +170,9 @@ const Vista = {
         const tipo = document.getElementById('tipoComboBoxCampo')
         const cantidad = document.getElementById('cantidadCampo')
         const descripcion = document.getElementById('descripcionCampo')
+        const ubicacion = document.getElementById('ubicacionCampo')
 
-        return { nombre, tipo, cantidad, descripcion }
+        return { nombre, tipo, cantidad, descripcion, ubicacion }
     },
 
     mostrarTablaDatos: function () {
@@ -201,7 +234,8 @@ const Vista = {
                                 const tipoCampo = dato['tipo']
                                 const cantidadCampo = dato['cantidad']
                                 const descripcionCampo = dato['descripcion']
-                                Vista.modalContenido(modalCuerpo, nombreCampo, tipoCampo, cantidadCampo, descripcionCampo)
+                                const ubicacionCampo = dato['ubicacion']
+                                Vista.modalContenido(modalCuerpo, nombreCampo, tipoCampo, cantidadCampo, ubicacionCampo, descripcionCampo)
                             });
                         } else if (i === 1) {
                             // Configuración para el botón de eliminar
@@ -242,8 +276,9 @@ const Vista = {
         const tipoCampo = document.getElementById('tipoCampoEditar');
         const cantidadCampo = document.getElementById('cantidadCampoEditar');
         const descripcionCampo = document.getElementById('descripcionCampoEditar');
+        const ubicacionCampo = document.getElementById('ubicacionCampoEditar');
 
-        return { nombreCampo, tipoCampo, cantidadCampo, descripcionCampo }
+        return { nombreCampo, tipoCampo, cantidadCampo, ubicacionCampo, descripcionCampo }
     },
 
     mostrarMensajeExitoso(mensaje) {
@@ -286,14 +321,39 @@ const Controlador = {
         }
     },
 
+    async agregarHistorial(status, tabla, modificado, usuario) {
+        const fechaActual = this.fechaHoraActual()
+
+        if (status == 204) {
+            const res = await Modelo.agregarHistorial(tabla, modificado, usuario, fechaActual)
+            console.log(res)
+        }
+
+        if (status == 201) {
+            const res = await Modelo.agregarHistorial(tabla, modificado, usuario, fechaActual)
+            console.log(res)
+        }
+    },
+
     async insertarDatosFormulario() {
-        const { nombre, tipo, cantidad, descripcion } = Vista.traerDatosFormulario();
+        const { nombre, tipo, cantidad, ubicacion, descripcion } = Vista.traerDatosFormulario();
 
         try {
-            const res = await Modelo.insertarDatosTabla(nombre.value, tipo.value, cantidad.value, descripcion.value);
+            const res = await Modelo.insertarDatosTabla(nombre.value, tipo.value, cantidad.value, ubicacion.value, descripcion.value);
             this.notificacionResultados(res.status, "datos insertados")
-            this.vaciarDatosCampos();
-            Vista.mostrarTablaDatos();
+            if (res.status == 201) {
+                const datos_insertados = {
+                    nombre: nombre,
+                    cantidad: cantidad,
+                    tipo: tipo,
+                    ubicacion: ubicacion,
+                    descripcion: descripcion
+                }
+                this.agregarHistorial(res.status, "inventario", "añadido de producto", "admin", datos_insertados)
+                Vista.mostrarMensajeExitoso("agregado!")
+                this.vaciarDatosCampos();
+                Vista.mostrarTablaDatos();
+            }
 
         } catch (error) {
             console.log(error)
@@ -305,7 +365,7 @@ const Controlador = {
         const { nombreCampo, tipoCampo, cantidadCampo, descripcionCampo } = Vista.traerDatosEditarFormulario();
 
         try {
-            alert(nombreCampo.value, tipoCampo.value, cantidadCampo.value, descripcionCampo.value)
+            alert(nombreCampo.value, tipoCampo.value, cantidadCampo.value, ubicacionCampo.value, descripcionCampo.value)
             //const res = await Modelo.editarDatosFormulario(nombreCampo, tipoCampo, cantidadCampo, descripcionCampo)
             //console.log(res)
 
@@ -328,6 +388,46 @@ const Controlador = {
         }
     },
 
+    fechaHoraActual() {
+        // Crear un nuevo objeto Date, que contendrá la fecha y hora actuales
+        var fechaActual = new Date();
+
+        // Obtener los componentes de la fecha y hora
+        var año = fechaActual.getFullYear();
+        var mes = fechaActual.getMonth() + 1; // Se le agrega +1 ya que sino, iniciaria el mes desde 0 (ej. Enero = 0, Febrero = 1)
+        var dia = fechaActual.getDate();
+        var horas = fechaActual.getHours();
+        var minutos = fechaActual.getMinutes();
+        var segundos = fechaActual.getSeconds();
+
+        // Formatear la salida para asegurarse de que los valores tengan dos dígitos
+        if (mes < 10) {
+            mes = '0' + mes;
+        }
+
+        if (dia < 10) {
+            dia = '0' + dia;
+        }
+
+        if (horas < 10) {
+            horas = '0' + horas;
+        }
+
+        if (minutos < 10) {
+            minutos = '0' + minutos;
+        }
+
+        if (segundos < 10) {
+            segundos = '0' + segundos;
+        }
+
+        // Crear una cadena con la fecha y hora formateada
+        var fechaHoraActual = año + '-' + mes + '-' + dia + ' ' + horas + ':' + minutos + ':' + segundos;
+
+        // Imprimir la cadena
+        return fechaHoraActual
+    },
+
     abrirModal() {
         try {
             Vista.modal("targetModalInformacionDatos", 'abrirModalInformacionDatos', "cerrar-modal-informacion-datos");
@@ -337,12 +437,14 @@ const Controlador = {
     },
 
     vaciarDatosCampos() {
-        const { nombre, tipo, cantidad, descripcion } = Vista.traerDatosFormulario();
+        const { nombre, tipo, cantidad, ubicacion, descripcion } = Vista.traerDatosFormulario();
 
         nombre.value = ""
         tipo.value = ""
         cantidad.value = ""
         descripcion.value = ""
+        ubicacion.value = ""
+
     },
 
     iniciar() {
@@ -352,14 +454,14 @@ const Controlador = {
         const botonEditar = document.getElementById('botonEditar');
         botonEditar.onclick = function () {
             Controlador.editarDatosFormulario()
-            
+
         }
 
         const botonAgregar = document.getElementById('botonAgregar');
         botonAgregar.onclick = function () {
-            const { nombre, tipo, cantidad, descripcion } = Vista.traerDatosFormulario();
+            const { nombre, tipo, cantidad, ubicacion, descripcion } = Vista.traerDatosFormulario();
 
-            if (nombre.value.length == 0 || tipo.value.length == 0 || cantidad.value.length == 0 || descripcion.value.length == 0) {
+            if (nombre.value.length == 0 || tipo.value.length == 0 || cantidad.value.length == 0 || ubicacion.value.length == 0 || descripcion.value.length == 0) {
                 Swal.fire({
                     icon: "error",
                     title: "Error",
@@ -373,6 +475,7 @@ const Controlador = {
                         <b>Nombre:</b> ${nombre.value}<br>
                         <b>Tipo:</b> ${tipo.value}<br>
                         <b>Cantidad:</b> ${cantidad.value}<br>
+                        <b>Ubicacion:</b> ${ubicacion.value}<br>
                         <b>Descripción:</b> ${descripcion.value}<br>
                     </div>
                     `,

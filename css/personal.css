@@ -38,7 +38,7 @@ body {
 .pagina .contenedor {
     display: grid;
     grid-template-areas:
-        "opciones tabla";
+        "opciones personal";
     grid-template-columns: 0.2fr 1fr;
     height: 100vh;
 }
@@ -70,4 +70,66 @@ body {
 .pagina .contenedor .menu-opciones .opciones .active {
     border-left: 0.2vw solid rgb(236, 181, 63);
     background-color: rgb(255, 244, 231);
+}
+
+.pagina .contenedor .personal .contenedor{
+    grid-area: personal;
+    margin: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 5vh;
+    justify-content: space-between;
+    align-content: flex-start;
+}
+
+.pagina .contenedor .personal .usuario{
+    display: grid;
+    padding: 1vw;
+    grid-template-areas: 
+    "foto datos-personales"
+    "botones botones";
+    background-color: #ffffff;
+    height: 20vh;
+    width: 30vw;
+    align-items: center;
+}
+
+.pagina .contenedor .personal .usuario .foto-usuario{
+    grid-area: foto;
+    display: flex;
+    justify-content: center;
+}
+
+.pagina .contenedor .personal .usuario .foto-usuario img{
+    height: 15vh;
+}
+
+.pagina .contenedor .personal .usuario .datos-personales{
+    grid-area: datos-personales;
+    display: grid;
+    grid-template-areas: 
+    "nombre"
+    "rol"
+    "celular";
+    color: #888888;
+}
+
+.pagina .contenedor .personal .usuario .datos-personales .nombre{
+    font-size: 3vh;
+}
+
+.pagina .contenedor .personal .usuario .datos-personales, .puesto, .celular{
+    font-size: 2.2vh;
+}
+
+.pagina .contenedor .personal .usuario .botones{
+    grid-area: botones;
+    display: flex;
+    justify-content: end;
+}
+
+.pagina .contenedor .personal .usuario .botones button{
+    padding: 0.5vw 1.5vw;
+    color: rgb(92, 91, 91);;
+    background-color: rgb(255, 244, 231)
 }

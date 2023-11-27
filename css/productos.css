@@ -88,7 +88,7 @@ body {
 
 /* INFORMACION DATOS (MODAL)*/
 
-.pagina .contenedor .editar-formulario .contenido {
+.pagina .contenedor .contenido-tabla .editar-formulario .contenido {
     display: flex;
     flex-direction: column;
     row-gap: 2vw;
@@ -100,47 +100,50 @@ body {
     height: 80vh;
 }
 
-.pagina .contenedor .modal .modal-cabecera{
+.contenido-tabla .editar-formulario .contenido .modal-cabecera{
     display: flex;
     border-bottom: 1px solid var(--fondo);
 }
 
-.pagina .contenedor .modal .modal-cuerpo{
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo{
     display: grid;
     grid-template-areas: 
-    "nombre tipo cantidad"
-    "descripcion descripcion descripcion";
+    "nombre tipo"
+    "ubicacion cantidad"
+    "descripcion descripcion";
     row-gap: 3vh;
 }
 
-.pagina .contenedor .modal .modal-cuerpo .nombre{
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .nombre{
     grid-area: nombre;
 }
 
-.pagina .contenedor .modal .modal-cuerpo .tipo{
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .tipo{
     grid-area: tipo;
 }
 
-.pagina .contenedor .modal .modal-cuerpo .cantidad{
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .cantidad{
     grid-area: cantidad;
 }
 
-.pagina .contenedor .modal .modal-cuerpo .descripcion{
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion{
     grid-area: descripcion;
 }
 
-.pagina .contenedor .modal .modal-cuerpo .descripcion .entrada textarea{
-    width: 48vw;
-    height: 30vh;
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .ubicacion{
+    grid-area: ubicacion;
 }
 
-.pagina .contenedor .modal .modal-footer{
+.contenido-tabla .editar-formulario .contenido .modal-cuerpo .descripcion .entrada textarea{
+    width: 48vw;
+    height: 15vh;
+}
+
+.contenido-tabla .editar-formulario .contenido .modal-footer{
     text-align: end;
 }
 
-
 /* TABLA */
-
 .pagina .contenedor .contenido-tabla {
     grid-area: tabla;
     display: flex;
@@ -199,7 +202,7 @@ body {
 
 .pagina .contenedor .contenido-tabla .tabla th,
 td {
-    padding: 0.7vw 4vw;
+    padding: 0.7vw 3vw;
 }
 
 .pagina .contenedor .contenido-tabla .tabla td {
