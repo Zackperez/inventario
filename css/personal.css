@@ -82,6 +82,21 @@ body {
     align-content: flex-start;
 }
 
+.pagina .contenedor .personal .editar-usuarios{
+    padding: 2vw 5vw;
+}
+
+.pagina .contenedor .personal .editar-usuarios .campos-editar-usuario{
+    display: flex;
+    column-gap: 2vw;
+    align-items: center;
+}
+
+.pagina .contenedor .personal .editar-usuarios .campos-editar-usuario .boton button{
+    background-color: aquamarine;
+    padding: 0.5vw 2.2vw;
+}
+
 .pagina .contenedor .personal .usuario{
     display: grid;
     padding: 1vw;
@@ -132,4 +147,31 @@ body {
     padding: 0.5vw 1.5vw;
     color: rgb(92, 91, 91);;
     background-color: rgb(255, 244, 231)
+}
+
+.personal .editar-usuarios .editar-usuario-modal {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2vw;
+    margin: 5% 25%;
+    padding: 0 2vw;
+    background-color: green;
+    border-radius: 0.5vw;
+    width: 50vw;
+    height: 80vh;
+}
+
+.personal .editar-usuarios .editar-usuario-modal .modal-cabecera{
+    display: flex;
+    border-bottom: 1px solid var(--fondo);
+}
+
+.personal .editar-usuarios .editar-usuario-modal .modal-cuerpo{
+    display: flex;
+    flex-direction: row;
+    column-gap: 2vw;
+}
+
+.personal .editar-usuarios .campos-editar-usuario .modal-footer{
+    text-align: end;
 }

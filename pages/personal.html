@@ -26,6 +26,95 @@
                 </div>
 
                 <div class="personal">
+                    <div class="editar-usuarios">
+
+                        <div class="titulo">
+                            <h2>Editar usuarios</h2>
+                        </div>
+
+                        <div class="campos-editar-usuario">
+
+                            <div class="campo">
+                                <div class="titulo">
+                                    <label for="">Nombre:</label>
+                                </div>
+
+                                <div class="entrada">
+                                    <input type="text" id="campoNombre">
+                                </div>
+                            </div>
+
+                            <div class="campo">
+                                <div class="titulo">
+                                    <label for="">Puesto:</label>
+                                </div>
+
+                                <div class="entrada">
+                                    <input type="text" id="campoPuesto">
+                                </div>
+                            </div>
+
+                            <div class="campo">
+
+                                <div class="titulo">
+                                    <label for="">Celular:</label>
+                                </div>
+
+                                <div class="entrada">
+                                    <input type="text" id="campoCelular">
+                                </div>
+                            </div>
+
+                            <div class="boton">
+                                <button id="abrirModalEditarUsuario">Editar</button>
+                            </div>
+
+                        </div>
+
+                        <div class="editar-usuario-modal modal" id="targetModalEditarUsuario">
+                            <div class="contenido">
+                                <div class="titulo modal-cabecera">
+                                    <h1>Editar usuario</h1>
+                                    <a><i class="fa-solid fa-remove cerrar-modal-editar-usuario"></i></a>
+                                </div>
+        
+                                <div class="campos modal-cuerpo" id="modalCuerpo">
+                                    <div class="campo nombre">
+                                        <div class="texto">
+                                            <p>Nombre:</p>
+                                        </div>
+                                        <div class="entrada">
+                                            <input type="text" id="nombreUsuarioEditar">
+                                        </div>
+                                    </div>
+    
+                                    <div class="campo puesto">
+                                        <div class="texto">
+                                            <p>Marca:</p>
+                                        </div>
+                                        <div class="entrada">
+                                            <input type="text" id="puestoUsuarioEditar">
+                                        </div>
+                                    </div>
+    
+                                    <div class="campo celular">
+                                        <div class="texto">
+                                            <p>Celular:</p>
+                                        </div>
+                                        <div class="entrada">
+                                            <input type = "text" id="celularUsuarioEditar">
+                                        </div>
+                                    </div>
+    
+                                </div>
+        
+                                <div class="botones modal-footer">
+                                    <button id="editarUsuario" class="boton">Editar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="contenedor" id="contenedorUsuarios">
 
                     </div>
