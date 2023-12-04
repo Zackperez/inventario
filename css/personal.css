@@ -149,29 +149,27 @@ body {
     background-color: rgb(255, 244, 231)
 }
 
-.personal .editar-usuarios .editar-usuario-modal {
-    display: flex;
-    flex-direction: column;
+.editar-usuario-modal {
     row-gap: 2vw;
-    margin: 5% 25%;
+    margin: 7% 25%;
     padding: 0 2vw;
-    background-color: green;
     border-radius: 0.5vw;
     width: 50vw;
     height: 80vh;
+    background-color:#ffffff;
 }
 
-.personal .editar-usuarios .editar-usuario-modal .modal-cabecera{
+.editar-usuario-modal .modal-cabecera{
     display: flex;
     border-bottom: 1px solid var(--fondo);
 }
 
-.personal .editar-usuarios .editar-usuario-modal .modal-cuerpo{
+.editar-usuario-modal .modal-cuerpo{
     display: flex;
     flex-direction: row;
     column-gap: 2vw;
 }
 
-.personal .editar-usuarios .campos-editar-usuario .modal-footer{
+.editar-usuario-modal  .campos-editar-usuario .modal-footer{
     text-align: end;
 }
